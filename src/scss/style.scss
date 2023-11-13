@@ -9,7 +9,7 @@
 /* ======Переменные====== */
 @import 'variables.scss';
 
-$font: Inter;
+$font: 'Proxima Nova';
 $dfont: 14px;
 
 /* ======/Переменные====== */
@@ -18,6 +18,13 @@ $dfont: 14px;
 @import 'null.scss';
 /* ======/Обнуление====== */
 
+#root {
+    padding: 45px;
+}
+
 body {
     font-family: $font;
+    font-size: $dfont;
+
+    background-color: #FFDF8C;
 }

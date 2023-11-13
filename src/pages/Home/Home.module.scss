@@ -1,0 +1,19 @@
+.home {
+  padding: 40px 0;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  font-family: Proxima Nova;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+.content {
+    margin-top: 32px;
+}

@@ -1,0 +1,25 @@
+.item {
+  background-color: #f9f9f9;
+  padding: 16px 32px;
+  border-radius: 30px;
+
+  cursor: pointer;
+
+  transition: all .3s ease;
+
+  &:hover {
+    background-color: #282828;
+
+    &>.title {
+        color: #FFFFFF;
+    }
+  }
+}
+.title {
+  font-family: Proxima Nova;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 19px;
+  letter-spacing: 0.015em;
+  text-align: center;
+}

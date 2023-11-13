@@ -1,0 +1,72 @@
+.item {
+  display: grid;
+  grid-template-columns: auto 378px;
+  justify-content: space-between;
+  padding: 30px 0;
+  border-top: 1px solid #f4f4f4;
+}
+.info {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  & > img {
+    max-width: 80px;
+    max-height: 80px;
+    height: auto;
+  }
+}
+.infoBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.title {
+  font-family: Proxima Nova;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+.description {
+  font-family: Proxima Nova;
+  font-size: 18px;
+  font-weight: 400;
+  color: #8d8d8d;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.counter {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.minus {
+  background-color: transparent;
+}
+.count {
+  font-family: Proxima Nova;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: center;
+
+  min-width: 30px;
+}
+.plus {
+  background-color: transparent;
+}
+.price {
+  font-family: Proxima Nova;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+.remove {
+    background-color: transparent;
+}
