@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
+
+  position: relative;
 }
 .dropdownBtn {
   display: flex;
@@ -10,7 +12,7 @@
   cursor: pointer;
 
   & > h1 {
-    font-family: 'Inter';
+    font-family: "Inter";
     font-size: 14px;
     font-weight: 700;
     line-height: 17px;
@@ -19,7 +21,7 @@
   }
 }
 .title {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 14px;
   font-weight: 400;
   line-height: 17px;
@@ -29,4 +31,50 @@
   border-bottom: 1px dotted #fe5f1e;
 
   cursor: pointer;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  top: 30px;
+  right: 10px;
+
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 12px 0;
+  box-shadow: 0px 5px 15px 0px #00000017;
+
+  &.opened {
+    display: block;
+  }
+
+  @media (max-width: 425px) {
+    width: 100%;
+    height: auto;
+    right: 0;
+  }
+}
+
+.dropdownItem {
+  padding: 10px 14px;
+
+  cursor: pointer;
+
+  transition: all .2s ease;
+  & > span {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 17px;
+    letter-spacing: 0.015em;
+    text-align: left;
+  }
+
+  &.active {
+    background-color: #FE5F1E0D;
+
+    &>span {
+      color: #FE5F1E;
+    }
+  }
 }

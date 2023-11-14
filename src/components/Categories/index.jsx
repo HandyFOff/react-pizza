@@ -1,17 +1,25 @@
-import styles from './Categories.module.scss';
-import CategoriesItem from './CategoriesItem';
+import { useContext, useState } from "react";
+import styles from "./Categories.module.scss";
+import CategoriesItem from "./CategoriesItem";
+import { AppContext } from "../../context";
 
 const Categories = () => {
-    return (  
-        <div className={styles.categories}>
-            <CategoriesItem title={'Все'}/>
-            <CategoriesItem title={'Мясные'}/>
-            <CategoriesItem title={'Вегетарианская'}/>
-            <CategoriesItem title={'Гриль'}/>
-            <CategoriesItem title={'Острые'}/>
-            <CategoriesItem title={'Закрытые'}/>
-        </div>
-    );
-}
- 
+  const [active, setActive] = useState(0);
+  const { categories } = useContext(AppContext);
+
+  return (
+    <div className={styles.categories}>
+      {categories.map((title, index) => (
+        <CategoriesItem
+          key={index}
+          id={index}
+          title={title}
+          active={active}
+          setActive={setActive}
+        />
+      ))}
+    </div>
+  );
+};
+
 export default Categories;

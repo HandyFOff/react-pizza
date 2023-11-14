@@ -1,8 +1,20 @@
 import { useState } from "react";
 import styles from "./CatalogItem.module.scss";
 
-const CatalogItem = () => {
+const CatalogItem = ({
+  id,
+  title,
+  imageUrl,
+  sizes,
+  price,
+  category,
+  rating,
+  types,
+}) => {
   const [pizzaCount, setPizzaCount] = useState(0);
+  const [pizzaTypes] = useState(["тонкое", "традиционное"]);
+  const [activeSize, setActiveSize] = useState(0);
+  const [activetype, setActivetype] = useState(0);
 
   const increasePizzaCount = () => {
     if (pizzaCount === 9) return null;
@@ -12,32 +24,43 @@ const CatalogItem = () => {
   return (
     <div className={styles.item}>
       <div className={styles.img}>
-        <img src="https://i.imgur.com/50XOWwc.png" alt="Pizza img" />
+        <img src={imageUrl} alt="Pizza img" />
       </div>
-      <h1 className={styles.title}>Чизбургер-пицца</h1>
+      <h1 className={styles.title}>{title}</h1>
       <div className={styles.settings}>
         <div className={styles.slices}>
-          <div className={styles.slice}>
-            <span>тонкое</span>
-          </div>
-          <div className={styles.slice}>
-            <span>традиционное</span>
-          </div>
+          {types.map((item, index) => (
+            <div
+              key={index}
+              className={
+                styles.slice +
+                " " +
+                (types.length === 1 ? styles.alone : "") +
+                " " +
+                (activetype === index ? styles.active : "")
+              }
+              onClick={() => setActivetype(index)}
+            >
+              <span>{pizzaTypes[item]}</span>
+            </div>
+          ))}
         </div>
         <div className={styles.sizes}>
-          <div className={styles.size}>
-            <span>26 см.</span>
-          </div>
-          <div className={styles.size}>
-            <span>30 см.</span>
-          </div>
-          <div className={styles.size}>
-            <span>40 см.</span>
-          </div>
+          {sizes.map((item, index) => (
+            <div
+              key={index}
+              className={
+                styles.size + " " + (activeSize === index ? styles.active : "")
+              }
+              onClick={() => setActiveSize(index)}
+            >
+              <span>{item} см.</span>
+            </div>
+          ))}
         </div>
       </div>
       <div className={styles.info}>
-        <h1 className={styles.price}>от 395 ₽</h1>
+        <h1 className={styles.price}>от {price} ₽</h1>
         <button className={styles["btn-buy"]} onClick={increasePizzaCount}>
           <svg
             width="12"

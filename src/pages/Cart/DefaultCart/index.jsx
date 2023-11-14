@@ -10,10 +10,10 @@ const DefaultCart = () => {
           <img src="assets/icons/cart-icon.svg" alt="cart" />
           <h1>Корзина</h1>
         </div>
-        <div className={styles.clear}>
-          <img src="assets/icons/trash.svg" alt="trash" />
+        <Link to={'/empty'} className={styles.clear}>
+          <img src="assets/icons/trash.svg" alt="trash"/>
           <h1>Очистить корзину</h1>
-        </div>
+        </Link>
       </div>
       <div className={styles.content}>
         <CartCatalog />

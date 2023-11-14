@@ -1,13 +1,23 @@
 .home {
   padding: 40px 0;
+
+  @media (max-width: 768px) {
+    padding: 30px 0;
+  }
 }
 .top {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 240px;
+  gap: 40px;
   align-items: center;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 .title {
-  font-family: 'Inter';
+  font-family: "Inter";
   font-size: 32px;
   font-weight: 700;
   line-height: 39px;
@@ -15,5 +25,5 @@
   text-align: left;
 }
 .content {
-    margin-top: 32px;
+  margin-top: 32px;
 }

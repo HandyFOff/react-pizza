@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./EmptyCart.module.scss";
 
 const EmptyCart = () => {
@@ -13,9 +14,9 @@ const EmptyCart = () => {
       <div className={styles.img}>
         <img src="assets/images/empty-cart.png" alt="empty-cart.png" />
       </div>
-      <button className={styles.button}>
+      <Link to={'/'} className={styles.button}>
         <span>Вернуться назад</span>
-      </button>
+      </Link>
     </div>
   );
 };

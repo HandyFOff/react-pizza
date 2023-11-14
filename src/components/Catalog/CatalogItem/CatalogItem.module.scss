@@ -2,19 +2,25 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+
+  // max-width: 280px;
 }
 .img {
-  max-width: 100%;
-  height: auto;
-  align-self: center;
+  &>img {
+    max-width: 100%;
+    height: auto;
+    align-self: center;
+  }
 }
 .title {
   font-family: 'Inter';
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 900;
   line-height: 24px;
   letter-spacing: 0.01em;
   text-align: center;
+
+  // flex: 1;
 
   margin-bottom: 10px;
 }
@@ -39,6 +45,10 @@
   justify-content: center;
 
   transition: all .1s ease;
+
+  &.alone {
+    grid-column: 1 / span 2;
+  }
 
   cursor: pointer;
 
