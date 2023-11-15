@@ -1,4 +1,3 @@
-// import styles from "./App.module.scss";
 import Layout from "../Layout";
 import Home from "../../pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -6,7 +5,7 @@ import Cart from "../../pages/Cart";
 import EmptyCart from "../../pages/Cart/EmptyCart";
 import { AppContext } from "../../context";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { usePizzas } from "../../hooks/usePizzas";
 
 export const API = "https://65535f5a5449cfda0f2e92ca.mockapi.io";
 
@@ -24,21 +23,15 @@ const App = () => {
   const [categoriesFilter, setCategoriesFilter] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const { getPizzas } = usePizzas();
+
   useEffect(() => {
-    try {
-      const fetchData = async () => {
-        const pizzas = await axios.get(`${API}/pizzas`).catch((e) => {
-          throw new Error(e);
-        });
+    const fetchData = async () => {
+      await getPizzas().then((res) => setPizzas(res));
+      setIsLoading(false);
+    };
 
-        setIsLoading(false);
-        setPizzas(pizzas.data);
-      };
-
-      fetchData();
-    } catch (error) {
-      return error;
-    }
+    fetchData();
   }, []);
 
   return (
@@ -52,6 +45,7 @@ const App = () => {
         sort,
         setSort,
         isLoading,
+        setIsLoading,
       }}
     >
       <BrowserRouter>
