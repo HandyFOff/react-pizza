@@ -1,21 +1,17 @@
-import { useContext, useState } from "react";
 import styles from "./Categories.module.scss";
 import CategoriesItem from "./CategoriesItem";
-import { AppContext } from "../../context";
+import { useSelector } from "react-redux";
 
 const Categories = () => {
-  const [active, setActive] = useState(0);
-  const { categories } = useContext(AppContext);
+  const data = useSelector((state) => state.filters.categories);
 
   return (
     <div className={styles.categories}>
-      {categories.map((title, index) => (
+      {data.list.map((title, index) => (
         <CategoriesItem
           key={index}
           id={index}
           title={title}
-          active={active}
-          setActive={setActive}
         />
       ))}
     </div>

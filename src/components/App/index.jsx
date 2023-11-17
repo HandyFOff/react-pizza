@@ -6,46 +6,39 @@ import EmptyCart from "../../pages/Cart/EmptyCart";
 import { AppContext } from "../../context";
 import { useEffect, useState } from "react";
 import { usePizzas } from "../../hooks/usePizzas";
-
-export const API = "https://65535f5a5449cfda0f2e92ca.mockapi.io";
+import { useSelector } from "react-redux";
 
 const App = () => {
-  const [pizzas, setPizzas] = useState([]);
-  const [categories] = useState([
-    "Все",
-    "Мясные",
-    "Вегетарианская",
-    "Гриль",
-    "Острые",
-    "Закрытые",
-  ]);
-  const [sort, setSort] = useState();
-  const [categoriesFilter, setCategoriesFilter] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const filters = useSelector((state) => state.filters);
 
+  const sort = filters.sort.currentSortProperty;
+  const filter = filters.categories.currentCategoryProperty;
+
+  const [pizzas, setPizzas] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
   const { getPizzas } = usePizzas();
 
   useEffect(() => {
     const fetchData = async () => {
-      await getPizzas().then((res) => setPizzas(res));
+      await getPizzas(page, sort, filter).then((res) => setPizzas(res));
       setIsLoading(false);
     };
 
     fetchData();
-  }, []);
+  }, [sort, page, filter]);
 
   return (
     <AppContext.Provider
       value={{
         pizzas,
         setPizzas,
-        categoriesFilter,
-        setCategoriesFilter,
-        categories,
-        sort,
-        setSort,
         isLoading,
         setIsLoading,
+        search,
+        setSearch,
+        setPage,
       }}
     >
       <BrowserRouter>

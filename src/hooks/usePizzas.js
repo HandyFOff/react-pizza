@@ -1,12 +1,15 @@
 import axios from "axios";
-import { API } from "../components/App";
+const API = "https://react-pizza-api.up.railway.app/api";
 
 export const usePizzas = () => {
-  const getPizzas = async () => {
+  const getPizzas = async (page, sort, filter) => {
     try {
-      const response = await axios.get(`${API}/pizzas`).catch((e) => {
-        throw new Error(e);
-      });
+      console.log(sort);
+      const response = await axios
+        .get(`${API}/data?_page=${page}&_limit=4&_sort=${sort}${filter}`)
+        .catch((e) => {
+          throw new Error(e);
+        });
 
       return response.data;
     } catch (error) {

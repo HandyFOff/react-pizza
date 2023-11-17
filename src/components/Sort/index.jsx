@@ -1,16 +1,32 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styles from "./Sort.module.scss";
-import { AppContext } from "../../context";
+import { useDispatch, useSelector } from "react-redux";
+import { setSort } from "../../redux/slices/filterSlice";
 
 const Sort = () => {
-  const { setSort } = useContext(AppContext);
-  const list = ["популярности", "цене", "алфавиту"];
+  const data = useSelector((state) => state.filters.sort);
+  const dispatch = useDispatch();
+
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(0);
 
-  const handlerSort = (item, index) => {
-    setSort(item);
-    setSelected(index);
+  const handlerSort = (sortName, id) => {
+    dispatch(setSort({property: sortName, propertyName: id}))
+    setSelected(id);
+  };
+
+  const renderList = () => {
+    return data.list.map((item) => (
+      <div
+        className={
+          styles.dropdownItem + " " + (selected === item.id ? styles.active : "")
+        }
+        key={item.id}
+        onClick={() => handlerSort(item.sortName, item.id)}
+      >
+        <span>{item.sortName}</span>
+      </div>
+    ));
   };
 
   return (
@@ -20,22 +36,10 @@ const Sort = () => {
         <h1>Сортировка по:</h1>
       </div>
       <span className={styles.title} onClick={() => setOpened((prev) => !prev)}>
-        {list[selected]}
+        {data.list[selected].sortName}
       </span>
       <div className={styles.dropdown + " " + (opened ? styles.opened : "")}>
-        {list.map((item, index) => (
-          <div
-            className={
-              styles.dropdownItem +
-              " " +
-              (selected === index ? styles.active : "")
-            }
-            key={index}
-            onClick={() => handlerSort(item, index)}
-          >
-            <span>{item}</span>
-          </div>
-        ))}
+        {renderList()}
       </div>
     </div>
   );

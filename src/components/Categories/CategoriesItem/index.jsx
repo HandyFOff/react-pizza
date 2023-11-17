@@ -1,25 +1,26 @@
-import { useContext } from "react";
 import styles from "./CategoriesItem.module.scss";
-import { AppContext } from "../../../context";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategory } from "../../../redux/slices/filterSlice";
 
-const CategoriesItem = ({ title, active, id, setActive }) => {
-  const { setCategoriesFilter } = useContext(AppContext);
+const CategoriesItem = ({ title, id }) => {
+  const dispatch = useDispatch();
+  const data = useSelector((state) => state.filters);
 
   const handlerToActive = () => {
-    if (title === 'Все') {
-      console.log(title);
-      setActive(id);
-      setCategoriesFilter(null);
-
+    if (id === 0) {
+      dispatch(setCategory({ propertyId: "", id }));
       return false;
     }
-    setActive(id);
-    setCategoriesFilter(id);
+    dispatch(setCategory({ propertyId: `&category=${id}`, id }));
   };
 
   return (
     <div
-      className={styles.item + " " + (active === id ? styles.active : null)}
+      className={
+        styles.item +
+        " " +
+        (data.categories.currentCategory === id ? styles.active : null)
+      }
       onClick={handlerToActive}
     >
       <h1 className={styles.title}>{title}</h1>
