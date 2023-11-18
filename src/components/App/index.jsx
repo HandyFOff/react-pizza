@@ -13,21 +13,22 @@ const App = () => {
 
   const sort = filters.sort.currentSortProperty;
   const filter = filters.categories.currentCategoryProperty;
+  const page = filters.currentPage;
 
   const [pizzas, setPizzas] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+
   const { getPizzas } = usePizzas();
 
   useEffect(() => {
     const fetchData = async () => {
-      await getPizzas(page, sort, filter).then((res) => setPizzas(res));
+      await getPizzas(page, sort, filter, search).then((res) => setPizzas(res));
       setIsLoading(false);
     };
 
     fetchData();
-  }, [sort, page, filter]);
+  }, [sort, page, filter, search]);
 
   return (
     <AppContext.Provider
@@ -38,7 +39,6 @@ const App = () => {
         setIsLoading,
         search,
         setSearch,
-        setPage,
       }}
     >
       <BrowserRouter>

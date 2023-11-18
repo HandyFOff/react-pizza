@@ -4,22 +4,22 @@ import CatalogItem from "./CatalogItem";
 import { AppContext } from "../../context";
 import PizzaLoader from "../PizzaLoader";
 import Paginate from "../Paginate";
+import { useDispatch } from "react-redux";
+import { setPage } from "../../redux/slices/filterSlice";
 
 const Catalog = () => {
-  const { isLoading, pizzas, search, setPage } = useContext(AppContext);
+  const { isLoading, pizzas } = useContext(AppContext);
+
+  const dispatch = useDispatch();
 
   const renderItems = () => {
     return isLoading
       ? [...Array(4)].map((_, index) => <PizzaLoader key={index} />)
-      : pizzas
-          .filter((item) =>
-            item.title.toLowerCase().includes(search.toLowerCase())
-          )
-          .map((item) => <CatalogItem key={item.id} {...item} />);
+      : pizzas.map((item) => <CatalogItem key={item.id} {...item} />);
   };
 
   const handlePageClick = (page) => {
-    setPage(++page.selected);
+    dispatch(setPage({page: ++page.selected}));
   };
 
   return (
