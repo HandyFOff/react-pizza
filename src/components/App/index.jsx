@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import { usePizzas } from "../../hooks/usePizzas";
 import { useSelector } from "react-redux";
 
+export const API = "https://react-pizza-api.up.railway.app/api";
+
 const App = () => {
   const filters = useSelector((state) => state.filters);
 

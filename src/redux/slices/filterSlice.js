@@ -27,12 +27,13 @@ const filtersSlice = createSlice({
       state.categories.currentCategory = action.payload.id;
     },
     setSort: (state, action) => {
-      state.sort.currentSortProperty = state.sort.list[action.payload.propertyName].sort;
+      state.sort.currentSortProperty =
+        state.sort.list[action.payload.propertyName].sort;
       state.sort.currentSort = action.payload.property;
     },
     setPage: (state, action) => {
       state.currentPage = action.payload.page;
-    }
+    },
   },
 });
 

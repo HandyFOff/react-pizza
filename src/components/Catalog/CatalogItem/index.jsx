@@ -1,20 +1,21 @@
 import { useState } from "react";
 import styles from "./CatalogItem.module.scss";
+import { useDispatch } from "react-redux";
+import { postToCart } from "../../../redux/slices/cartSlice";
 
-const CatalogItem = ({
-  id,
-  title,
-  imageUrl,
-  sizes,
-  price,
-  category,
-  rating,
-  types,
-}) => {
+const CatalogItem = ({id, category, rating, title, imageUrl, sizes, price, types }) => {
   const [pizzaCount, setPizzaCount] = useState(0);
   const [pizzaTypes] = useState(["тонкое", "традиционное"]);
   const [activeSize, setActiveSize] = useState(0);
   const [activetype, setActivetype] = useState(0);
+
+  const dispatch = useDispatch();
+
+  const handlerAddToCart = () => {
+    dispatch(postToCart({id, category, rating, title, imageUrl, sizes, price, types }))
+
+    increasePizzaCount();
+  }
 
   const increasePizzaCount = () => {
     if (pizzaCount === 9) return null;
@@ -61,7 +62,7 @@ const CatalogItem = ({
       </div>
       <div className={styles.info}>
         <h1 className={styles.price}>от {price} ₽</h1>
-        <button className={styles["btn-buy"]} onClick={increasePizzaCount}>
+        <button className={styles["btn-buy"]} onClick={handlerAddToCart}>
           <svg
             width="12"
             height="12"

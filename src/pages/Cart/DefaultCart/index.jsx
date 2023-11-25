@@ -1,8 +1,16 @@
 import styles from './DefaultCart.module.scss';
 import CartCatalog from '../../../components/CartCatalog'
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../../../redux/slices/cartSlice';
 
 const DefaultCart = () => {
+  const dispatch = useDispatch();
+
+  const handlerClearCart = () => {
+    dispatch(clearCart());
+  }
+
   return (
     <div className={styles.cart}>
       <div className={styles.top}>
@@ -10,7 +18,7 @@ const DefaultCart = () => {
           <img src="assets/icons/cart-icon.svg" alt="cart" />
           <h1>Корзина</h1>
         </div>
-        <Link to={'/empty'} className={styles.clear}>
+        <Link to={'/empty'} className={styles.clear} onClick={handlerClearCart}>
           <img src="assets/icons/trash.svg" alt="trash"/>
           <h1>Очистить корзину</h1>
         </Link>
