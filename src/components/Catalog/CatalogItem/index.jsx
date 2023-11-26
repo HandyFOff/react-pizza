@@ -3,19 +3,39 @@ import styles from "./CatalogItem.module.scss";
 import { useDispatch } from "react-redux";
 import { postToCart } from "../../../redux/slices/cartSlice";
 
-const CatalogItem = ({id, category, rating, title, imageUrl, sizes, price, types }) => {
+const pizzaTypes = ["тонкое", "традиционное"];
+const pizzaSizes = [26, 30, 40];
+
+const CatalogItem = ({
+  id,
+  category,
+  rating,
+  title,
+  imageUrl,
+  sizes,
+  price,
+  types,
+}) => {
   const [pizzaCount, setPizzaCount] = useState(0);
-  const [pizzaTypes] = useState(["тонкое", "традиционное"]);
   const [activeSize, setActiveSize] = useState(0);
-  const [activetype, setActivetype] = useState(0);
+  const [activeType, setActiveType] = useState(0);
 
   const dispatch = useDispatch();
 
   const handlerAddToCart = () => {
-    dispatch(postToCart({id, category, rating, title, imageUrl, sizes, price, types }))
+    const item = {
+      id,
+      title,
+      imageUrl,
+      size: pizzaSizes[activeSize],
+      price,
+      type: pizzaTypes[activeType],
+    };
+    console.log(id);
+    dispatch(postToCart(item));
 
     increasePizzaCount();
-  }
+  };
 
   const increasePizzaCount = () => {
     if (pizzaCount === 9) return null;
@@ -38,9 +58,9 @@ const CatalogItem = ({id, category, rating, title, imageUrl, sizes, price, types
                 " " +
                 (types.length === 1 ? styles.alone : "") +
                 " " +
-                (activetype === index ? styles.active : "")
+                (activeType === index ? styles.active : "")
               }
-              onClick={() => setActivetype(index)}
+              onClick={() => setActiveType(index)}
             >
               <span>{pizzaTypes[item]}</span>
             </div>

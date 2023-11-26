@@ -1,15 +1,16 @@
-import styles from './DefaultCart.module.scss';
-import CartCatalog from '../../../components/CartCatalog'
-import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { clearCart } from '../../../redux/slices/cartSlice';
+import styles from "./DefaultCart.module.scss";
+import CartCatalog from "../../../components/CartCatalog";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearCart } from "../../../redux/slices/cartSlice";
 
 const DefaultCart = () => {
   const dispatch = useDispatch();
+  const { totalPrice, totalPositions } = useSelector((state) => state.cart);
 
   const handlerClearCart = () => {
     dispatch(clearCart());
-  }
+  };
 
   return (
     <div className={styles.cart}>
@@ -18,8 +19,8 @@ const DefaultCart = () => {
           <img src="assets/icons/cart-icon.svg" alt="cart" />
           <h1>Корзина</h1>
         </div>
-        <Link to={'/empty'} className={styles.clear} onClick={handlerClearCart}>
-          <img src="assets/icons/trash.svg" alt="trash"/>
+        <Link to={"/empty"} className={styles.clear} onClick={handlerClearCart}>
+          <img src="assets/icons/trash.svg" alt="trash" />
           <h1>Очистить корзину</h1>
         </Link>
       </div>
@@ -29,14 +30,14 @@ const DefaultCart = () => {
       <div className={styles.info}>
         <div className={styles.total}>
           <h1 className={styles.count}>
-            Всего пицц: <b>3 шт.</b>
+            Всего пицц: <b>{totalPositions} шт.</b>
           </h1>
           <div className={styles.price}>
-            Сумма заказа: <b>900 ₽</b>
+            Сумма заказа: <b>{totalPrice} ₽</b>
           </div>
         </div>
         <div className={styles.buttons}>
-          <Link to={'/'} className={styles.btn_back}>
+          <Link to={"/"} className={styles.btn_back}>
             <svg
               width="8"
               height="14"

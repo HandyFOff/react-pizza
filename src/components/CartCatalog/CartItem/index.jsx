@@ -3,15 +3,10 @@ import styles from "./CartItem.module.scss";
 import { useDispatch } from "react-redux";
 import { deleteFromCart } from "../../../redux/slices/cartSlice";
 
-const pizzaTypes = ["тонкое", "традиционное"];
-const sizesValues = [26, 30, 40];
-
-const CartItem = ({ id, imageUrl, title, types, sizes, price }) => {
+const CartItem = ({ id, imageUrl, title, type, size, price }) => {
   const [pizzaCount, setPizzaCount] = useState(0);
 
   const dispatch = useDispatch();
-
-  console.log(types, sizes);
 
   const increasePizzaCount = () => {
     setPizzaCount((prev) => (prev += 1));
@@ -33,7 +28,7 @@ const CartItem = ({ id, imageUrl, title, types, sizes, price }) => {
         <div className={styles.infoBlock}>
           <h1 className={styles.title}>{title}</h1>
           <p className={styles.description}>
-            {pizzaTypes[0]}, {sizesValues[0]} см.
+            {type}, {size} см.
           </p>
         </div>
       </div>

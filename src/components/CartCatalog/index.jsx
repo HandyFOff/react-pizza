@@ -7,14 +7,14 @@ const CartCatalog = () => {
 
     return (  
         <div className={styles.catalog}>
-            {data.map((item) =>
+            {data.map((item, index) =>
                 <CartItem
-                    key={item.id}
+                    key={index}
                     id={item.id}
                     imageUrl={item.imageUrl}
                     title={item.title}
-                    types={item.types}
-                    sizes={item.sizes}
+                    type={item.type}
+                    size={item.size}
                     price={item.price}
                 />
             )}
