@@ -16,6 +16,7 @@ const CartCatalog = () => {
                     type={item.type}
                     size={item.size}
                     price={item.price}
+                    count={item.count}
                 />
             )}
         </div>

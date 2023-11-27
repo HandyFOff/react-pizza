@@ -11,14 +11,36 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     postToCart: (state, action) => {
-      state.data.push(action.payload);
-      state.totalPositions = state.data.length;
+      const foundInCart = state.data.find((item) => item.id === action.payload.id);
+
+      if (foundInCart) {
+        foundInCart.count++;
+      } else {
+        state.data.push({
+          ...action.payload,
+          count: 1,
+        });
+      }
+      
+      state.totalPositions++;
       state.totalPrice += +action.payload.price;
     },
     deleteFromCart: (state, action) => {
-      state.data = state.data.filter((item) => +item.id !== +action.payload.id);
-      state.totalPositions = state.data.length;
-      state.totalPrice -= +action.payload.price;
+      const foundItem = state.data.find((item) => item.id === action.payload.id);
+
+      state.totalPrice -= (foundItem.price * foundItem.count);
+      state.totalPositions -= foundItem.count;
+      
+      state.data = state.data.filter((item) => item.id !== action.payload.id);
+    },
+    decreaseCount: (state, action) => {
+      const foundInCart = state.data.find((item) => item.id === action.payload.id);
+
+      if (foundInCart.count > 1) {
+        foundInCart.count--;
+        state.totalPositions--;
+        state.totalPrice -= +action.payload.price;
+      } 
     },
     clearCart: (state) => {
       state.data = [];
@@ -28,5 +50,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { postToCart, deleteFromCart, clearCart} = cartSlice.actions;
+export const { postToCart, deleteFromCart, clearCart, decreaseCount} = cartSlice.actions;
 export default cartSlice.reducer;

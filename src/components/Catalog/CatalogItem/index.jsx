@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styles from "./CatalogItem.module.scss";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postToCart } from "../../../redux/slices/cartSlice";
 
 const pizzaTypes = ["тонкое", "традиционное"];
@@ -16,9 +16,14 @@ const CatalogItem = ({
   price,
   types,
 }) => {
-  const [pizzaCount, setPizzaCount] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
   const [activeType, setActiveType] = useState(0);
+
+  const cartItem = useSelector((state) =>
+    state.cart.data.find((item) => item.id === id)
+  );
+
+  const addedCount = cartItem ? cartItem.count : 0;
 
   const dispatch = useDispatch();
 
@@ -31,15 +36,7 @@ const CatalogItem = ({
       price,
       type: pizzaTypes[activeType],
     };
-    console.log(id);
     dispatch(postToCart(item));
-
-    increasePizzaCount();
-  };
-
-  const increasePizzaCount = () => {
-    if (pizzaCount === 9) return null;
-    setPizzaCount((prev) => (prev += 1));
   };
 
   return (
@@ -97,9 +94,11 @@ const CatalogItem = ({
           </svg>
 
           <h1>Добавить</h1>
-          <div className={styles.circle}>
-            <span>{pizzaCount}</span>
-          </div>
+          {addedCount > 0 && (
+            <div className={styles.circle}>
+              <span>{addedCount}</span>
+            </div>
+          )}
         </button>
       </div>
     </div>

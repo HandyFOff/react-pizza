@@ -11,6 +11,7 @@ const Search = () => {
 
   const onClearSearch = () => {
     setSearch("");
+    setValue("");
     searchRef.current.focus();
   };
 

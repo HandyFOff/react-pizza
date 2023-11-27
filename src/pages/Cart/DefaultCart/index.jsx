@@ -9,6 +9,7 @@ const DefaultCart = () => {
   const { totalPrice, totalPositions } = useSelector((state) => state.cart);
 
   const handlerClearCart = () => {
+    window.confirm(`Вы точно хотите удалить все пиццы?`);
     dispatch(clearCart());
   };
 
