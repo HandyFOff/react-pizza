@@ -2,11 +2,11 @@ import styles from "./DefaultCart.module.scss";
 import CartCatalog from "../../../components/CartCatalog";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../../../redux/slices/cartSlice";
+import { clearCart, selectCart } from "../../../redux/slices/cartSlice";
 
 const DefaultCart = () => {
   const dispatch = useDispatch();
-  const { totalPrice, totalPositions } = useSelector((state) => state.cart);
+  const { totalPrice, totalPositions } = useSelector(selectCart);
 
   const handlerClearCart = () => {
     window.confirm(`Вы точно хотите удалить все пиццы?`);

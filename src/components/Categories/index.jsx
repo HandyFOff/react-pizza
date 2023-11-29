@@ -1,18 +1,15 @@
+import { selectFilters } from "../../redux/slices/filterSlice";
 import styles from "./Categories.module.scss";
 import CategoriesItem from "./CategoriesItem";
 import { useSelector } from "react-redux";
 
 const Categories = () => {
-  const data = useSelector((state) => state.filters.categories);
+  const { categories } = useSelector(selectFilters);
 
   return (
     <div className={styles.categories}>
-      {data.list.map((title, index) => (
-        <CategoriesItem
-          key={index}
-          id={index}
-          title={title}
-        />
+      {categories.list.map((title, index) => (
+        <CategoriesItem key={index} id={index} title={title} />
       ))}
     </div>
   );

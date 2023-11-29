@@ -10,6 +10,12 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 65px 40px;
 
+  &.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   @media (max-width: 1440px) {
     grid-template-columns: 1fr 1fr 1fr;
   }

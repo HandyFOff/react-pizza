@@ -1,10 +1,10 @@
 import styles from "./CategoriesItem.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setCategory } from "../../../redux/slices/filterSlice";
+import { selectFilters, setCategory } from "../../../redux/slices/filterSlice";
 
 const CategoriesItem = ({ title, id }) => {
   const dispatch = useDispatch();
-  const data = useSelector((state) => state.filters);
+  const { categories } = useSelector(selectFilters);
 
   const handlerToActive = () => {
     if (id === 0) {
@@ -19,7 +19,7 @@ const CategoriesItem = ({ title, id }) => {
       className={
         styles.item +
         " " +
-        (data.categories.currentCategory === id ? styles.active : null)
+        (categories.currentCategory === id ? styles.active : null)
       }
       onClick={handlerToActive}
     >

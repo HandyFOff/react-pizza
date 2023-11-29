@@ -3,56 +3,36 @@ import Home from "../../pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Cart from "../../pages/Cart";
 import EmptyCart from "../../pages/Cart/EmptyCart";
-import { AppContext } from "../../context";
-import { useEffect, useState } from "react";
-import { usePizzas } from "../../hooks/usePizzas";
-import { useSelector } from "react-redux";
-
-export const API = "https://react-pizza-api.up.railway.app/api";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPizza } from "../../redux/slices/pizzaSlice";
+import { selectFilters } from "../../redux/slices/filterSlice";
 
 const App = () => {
-  const filters = useSelector((state) => state.filters);
+  const { sort, categories, currentPage, searchValue } = useSelector(selectFilters);
 
-  const sort = filters.sort.currentSortProperty;
-  const filter = filters.categories.currentCategoryProperty;
-  const page = filters.currentPage;
+  const dispatch = useDispatch();
 
-  const [pizzas, setPizzas] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [search, setSearch] = useState("");
-
-  const { getPizzas } = usePizzas();
+  const sortProperty = sort.currentSortProperty;
+  const filterProperty = categories.currentCategoryProperty;
+  const pageProperty = currentPage;
 
   useEffect(() => {
-    const fetchData = async () => {
-      await getPizzas(page, sort, filter, search).then((res) => setPizzas(res));
-      setIsLoading(false);
-    };
-
-    fetchData();
-  }, [sort, page, filter, search]);
+    dispatch(
+      fetchPizza({ sortProperty, filterProperty, pageProperty, searchValue })
+    );
+  }, [dispatch, sortProperty, filterProperty, pageProperty, searchValue]);
 
   return (
-    <AppContext.Provider
-      value={{
-        pizzas,
-        setPizzas,
-        isLoading,
-        setIsLoading,
-        search,
-        setSearch,
-      }}
-    >
-      <BrowserRouter>
-        <Routes>
-          <Route path={"/"} element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path={"/cart"} element={<Cart />} />
-            <Route path={"/empty"} element={<EmptyCart />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </AppContext.Provider>
+    <BrowserRouter>
+      <Routes>
+        <Route path={"/"} element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path={"/cart"} element={<Cart />} />
+          <Route path={"/empty"} element={<EmptyCart />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 

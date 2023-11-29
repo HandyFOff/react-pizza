@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./CatalogItem.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { postToCart } from "../../../redux/slices/cartSlice";
+import { postToCart, selectCartById } from "../../../redux/slices/cartSlice";
 
 const pizzaTypes = ["тонкое", "традиционное"];
 const pizzaSizes = [26, 30, 40];
@@ -19,9 +19,7 @@ const CatalogItem = ({
   const [activeSize, setActiveSize] = useState(0);
   const [activeType, setActiveType] = useState(0);
 
-  const cartItem = useSelector((state) =>
-    state.cart.data.find((item) => item.id === id)
-  );
+  const cartItem = useSelector(selectCartById(id));
 
   const addedCount = cartItem ? cartItem.count : 0;
 
