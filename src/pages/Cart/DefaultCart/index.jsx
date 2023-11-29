@@ -20,10 +20,10 @@ const DefaultCart = () => {
           <img src="assets/icons/cart-icon.svg" alt="cart" />
           <h1>Корзина</h1>
         </div>
-        <Link to={"/empty"} className={styles.clear} onClick={handlerClearCart}>
+        <div className={styles.clear} onClick={handlerClearCart}>
           <img src="assets/icons/trash.svg" alt="trash" />
           <h1>Очистить корзину</h1>
-        </Link>
+        </div>
       </div>
       <div className={styles.content}>
         <CartCatalog />

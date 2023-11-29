@@ -2,11 +2,12 @@ import Layout from "../Layout";
 import Home from "../../pages/Home";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Cart from "../../pages/Cart";
-import EmptyCart from "../../pages/Cart/EmptyCart";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchPizza } from "../../redux/slices/pizzaSlice";
 import { selectFilters } from "../../redux/slices/filterSlice";
+import FullPizza from "../FullPizza";
+import NotFound from "../../pages/NotFound";
 
 const App = () => {
   const { sort, categories, currentPage, searchValue } = useSelector(selectFilters);
@@ -29,7 +30,8 @@ const App = () => {
         <Route path={"/"} element={<Layout />}>
           <Route index element={<Home />} />
           <Route path={"/cart"} element={<Cart />} />
-          <Route path={"/empty"} element={<EmptyCart />} />
+          <Route path={"/pizza/:id"} element={<FullPizza/>}/>
+          <Route path={"*"} element={<NotFound/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

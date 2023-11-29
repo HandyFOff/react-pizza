@@ -1,0 +1,25 @@
+.error {
+    margin: 240px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.title {
+    font-family: "Inter";
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-align: center;
+}
+
+.description {
+    font-family: "Inter";
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #777777;
+}

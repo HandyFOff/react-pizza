@@ -1,9 +1,11 @@
 import styles from "./Header.module.scss";
 import Navigation from "../Navigation";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Search from "../Search";
 
 const Header = () => {
+  const {pathname} = useLocation();
+
   return (
     <header className={styles.header}>
       <div className={styles.left}>
@@ -12,7 +14,7 @@ const Header = () => {
         </Link>
         <Search />
       </div>
-      <Navigation />
+      {pathname !== '/cart' ? <Navigation /> : null }
     </header>
   );
 };

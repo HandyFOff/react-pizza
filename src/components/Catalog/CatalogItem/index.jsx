@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./CatalogItem.module.scss";
+import {Link} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import { postToCart, selectCartById } from "../../../redux/slices/cartSlice";
 
@@ -39,10 +40,12 @@ const CatalogItem = ({
 
   return (
     <div className={styles.item}>
-      <div className={styles.img}>
+      <Link to={`/pizza/${id}`} className={styles.img}>
         <img src={imageUrl} alt="Pizza img" />
-      </div>
-      <h1 className={styles.title}>{title}</h1>
+      </Link>
+      <Link to={`/pizza/${id}`}>
+        <h1 className={styles.title}>{title}</h1>
+      </Link>
       <div className={styles.settings}>
         <div className={styles.slices}>
           {types.map((item, index) => (
