@@ -9,22 +9,9 @@ import { selectFilters } from "../../redux/slices/filterSlice";
 import FullPizza from "../FullPizza";
 import NotFound from "../../pages/NotFound";
 
-interface IFilters {
-  sort: {
-    currentSortProperty: string;
-  };
-  categories: {
-    currentCategoryProperty: string;
-  };
-  currentPage: number;
-  searchValue: string;
-}
-
-const App: React.FC = () => {
-  const { sort, categories, currentPage, searchValue } = useSelector<
-    IFilters,
-    IFilters
-  >(selectFilters);
+const App = () => {
+  const { sort, categories, currentPage, searchValue } =
+    useSelector(selectFilters);
 
   const dispatch = useDispatch();
 
