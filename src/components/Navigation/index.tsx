@@ -3,7 +3,7 @@ import styles from "./Navigations.module.scss";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../redux/slices/cartSlice";
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   const {totalPrice, totalPositions} = useSelector(selectCart);
 
   return (

@@ -3,7 +3,7 @@ import Navigation from "../Navigation";
 import { Link, useLocation } from "react-router-dom";
 import Search from "../Search";
 
-const Header = () => {
+const Header: React.FC = () => {
   const {pathname} = useLocation();
 
   return (

@@ -1,13 +1,19 @@
 import { useEffect } from "react";
 import styles from "./FullPizza.module.scss";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import { useState } from "react";
 
-const FullPizza = () => {
+interface IPizzaItem {
+  imageUrl: string;
+  title: string;
+  price: number;
+}
+
+const FullPizza: React.FC = () => {
   const { id } = useParams();
 
-  const [item, setItem] = useState();
+  const [item, setItem] = useState<IPizzaItem>();
 
   const navigate = useNavigate();
 
@@ -16,27 +22,23 @@ const FullPizza = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const {data} = await axios.get(`${API}/data/${id}`);
+        const { data } = await axios.get(`${API}/data/${id}`);
 
         setItem(data);
       } catch (error) {
-        alert('УВЫ. Пицца не найдена D:');
-        navigate('/');
+        alert("УВЫ. Пицца не найдена D:");
+        navigate("/");
       }
-    }
+    };
 
     fetchData();
   }, [id, navigate]);
-  
+
   if (!item) return "Loading...";
 
   return (
     <div className={styles.item}>
-      <img
-        className={styles.img}
-        src={item.imageUrl}
-        alt={item.title}
-      />
+      <img className={styles.img} src={item.imageUrl} alt={item.title} />
       <h1 className={styles.title}>{item.title}</h1>
       <span className={styles.price}>{item.price}</span>
     </div>
