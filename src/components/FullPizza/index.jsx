@@ -26,7 +26,7 @@ const FullPizza = () => {
     }
 
     fetchData();
-  }, []);
+  }, [id, navigate]);
   
   if (!item) return "Loading...";
 
