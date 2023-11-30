@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./EmptyCart.module.scss";
 
-const EmptyCart = () => {
+const EmptyCart: React.FC = () => {
   return (
     <div className={styles.empty}>
       <div className={styles.info}>

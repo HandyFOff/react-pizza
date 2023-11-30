@@ -3,8 +3,16 @@ import styles from "./Paginate.module.scss";
 import { useSelector } from "react-redux";
 import { selectFilters } from "../../redux/slices/filterSlice";
 
-const Paginate = ({ handlePageClick }) => {
-  let { currentPage } = useSelector(selectFilters);
+interface ICurrentPage {
+  currentPage: number;
+}
+
+interface IPaginateProps {
+  handlePageClick: (page: { selected: number }) => void;
+}
+
+const Paginate: React.FC<IPaginateProps> = ({ handlePageClick }) => {
+  let { currentPage }: ICurrentPage = useSelector(selectFilters);
 
   return (
     <ReactPaginate

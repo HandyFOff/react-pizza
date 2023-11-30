@@ -1,32 +1,43 @@
 import { useState } from "react";
 import styles from "./CatalogItem.module.scss";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { postToCart, selectCartById } from "../../../redux/slices/cartSlice";
+
+interface IProps {
+  id: number;
+  title: string;
+  imageUrl: string;
+  sizes: number[];
+  price: number;
+  types: number[];
+}
+
+type CartItemType = {
+  count: number;
+};
 
 const pizzaTypes = ["тонкое", "традиционное"];
 const pizzaSizes = [26, 30, 40];
 
-const CatalogItem = ({
+const CatalogItem: React.FC<IProps> = ({
   id,
-  category,
-  rating,
   title,
   imageUrl,
   sizes,
   price,
   types,
 }) => {
-  const [activeSize, setActiveSize] = useState(0);
-  const [activeType, setActiveType] = useState(0);
+  const [activeSize, setActiveSize] = useState<number>(0);
+  const [activeType, setActiveType] = useState<number>(0);
 
-  const cartItem = useSelector(selectCartById(id));
+  const cartItem: CartItemType = useSelector(selectCartById(id));
 
-  const addedCount = cartItem ? cartItem.count : 0;
+  const addedCount: number = cartItem ? cartItem.count : 0;
 
   const dispatch = useDispatch();
 
-  const handlerAddToCart = () => {
+  const handlerAddToCart = (): void => {
     const item = {
       id,
       title,
@@ -48,7 +59,7 @@ const CatalogItem = ({
       </Link>
       <div className={styles.settings}>
         <div className={styles.slices}>
-          {types.map((item, index) => (
+          {types.map((item: number, index: number) => (
             <div
               key={index}
               className={
@@ -65,7 +76,7 @@ const CatalogItem = ({
           ))}
         </div>
         <div className={styles.sizes}>
-          {sizes.map((item, index) => (
+          {sizes.map((item: number, index: number) => (
             <div
               key={index}
               className={
@@ -80,7 +91,7 @@ const CatalogItem = ({
       </div>
       <div className={styles.info}>
         <h1 className={styles.price}>от {price} ₽</h1>
-        <button className={styles["btn-buy"]} onClick={handlerAddToCart}>
+        <button type="button" className={styles["btn-buy"]} onClick={handlerAddToCart}>
           <svg
             width="12"
             height="12"

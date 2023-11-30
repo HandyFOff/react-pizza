@@ -1,6 +1,6 @@
 import styles from './Error.module.scss';
 
-const Error = () => {
+const Error: React.FC = () => {
     return (  
         <div className={styles.error}>
             <h1 className={styles.title}>Произошла ошибка 😕</h1>

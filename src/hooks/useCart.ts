@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API } from "../components/App";
+const API = "https://react-pizza-api.up.railway.app/api";
 
 export const useCart = () => {
   const getData = async () => {
@@ -14,7 +14,7 @@ export const useCart = () => {
     }
   };
 
-  const deleteById = async (id) => {
+  const deleteById = async (id: number) => {
     try {
       const response = await axios.delete(`${API}/cart/${id}`).catch((e) => {
         throw new Error(e);

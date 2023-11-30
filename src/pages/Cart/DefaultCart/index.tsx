@@ -4,13 +4,19 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearCart, selectCart } from "../../../redux/slices/cartSlice";
 
-const DefaultCart = () => {
-  const dispatch = useDispatch();
-  const { totalPrice, totalPositions } = useSelector(selectCart);
+interface ICartTotals {
+  totalPrice: number;
+  totalPositions: number;
+}
 
-  const handlerClearCart = () => {
-    window.confirm(`Вы точно хотите удалить все пиццы?`);
-    dispatch(clearCart());
+const DefaultCart: React.FC = () => {
+  const dispatch = useDispatch();
+  const { totalPrice, totalPositions }: ICartTotals = useSelector(selectCart);
+
+  const handlerClearCart = (): void => {
+    if (window.confirm(`Вы точно хотите удалить все пиццы?`)) {
+      dispatch(clearCart());
+    }
   };
 
   return (
@@ -57,7 +63,7 @@ const DefaultCart = () => {
 
             <span>Вернуться назад</span>
           </Link>
-          <button className={styles.btn_buy}>
+          <button type="button" className={styles.btn_buy}>
             <span>Оплатить сейчас</span>
           </button>
         </div>

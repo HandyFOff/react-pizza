@@ -7,8 +7,27 @@ import { setPage } from "../../redux/slices/filterSlice";
 import Error from "./Error";
 import { selectPizza } from "../../redux/slices/pizzaSlice";
 
-const Catalog = () => {
-  const { items, loading, error } = useSelector(selectPizza);
+interface IPizzaItem {
+  id: number;
+  title: string;
+  imageUrl: string;
+  sizes: number[];
+  price: number;
+  types: number[];
+}
+
+interface IPizzaInfo {
+  items: IPizzaItem[];
+  loading: boolean;
+  error: boolean;
+}
+
+type PageType = {
+  selected: number;
+}
+
+const Catalog: React.FC = () => {
+  const { items, loading, error }: IPizzaInfo = useSelector(selectPizza);
 
   const dispatch = useDispatch();
 
@@ -22,8 +41,8 @@ const Catalog = () => {
     );
   };
 
-  const handlePageClick = (page) => {
-    dispatch(setPage({ page: ++page.selected }));
+  const handlePageClick = ({selected}: PageType): void => {
+    dispatch(setPage({ page: ++selected }));
   };
 
   return (

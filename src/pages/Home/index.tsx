@@ -3,7 +3,7 @@ import Categories from "../../components/Categories";
 import Sort from "../../components/Sort";
 import styles from "./Home.module.scss";
 
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <section className={styles.home}>
       <div className={styles.top}>

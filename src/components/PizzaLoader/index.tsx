@@ -1,6 +1,6 @@
 import ContentLoader from "react-content-loader";
 
-const PizzaLoader = (props) => {
+const PizzaLoader: React.FC = () => {
   return (
     <ContentLoader
       speed={2}
@@ -9,7 +9,6 @@ const PizzaLoader = (props) => {
       viewBox="0 0 100% 500"
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb"
-      {...props}
     >
       <rect x="1" y="1" rx="12" ry="12" width="100%" height="280" />
       <rect x="1" y="291" rx="8" ry="8" width="100%" height="24" />
