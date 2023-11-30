@@ -10,7 +10,8 @@ import FullPizza from "../FullPizza";
 import NotFound from "../../pages/NotFound";
 
 const App = () => {
-  const { sort, categories, currentPage, searchValue } = useSelector(selectFilters);
+  const { sort, categories, currentPage, searchValue } =
+    useSelector(selectFilters);
 
   const dispatch = useDispatch();
 
@@ -30,8 +31,8 @@ const App = () => {
         <Route path={"/"} element={<Layout />}>
           <Route index element={<Home />} />
           <Route path={"/cart"} element={<Cart />} />
-          <Route path={"/pizza/:id"} element={<FullPizza/>}/>
-          <Route path={"*"} element={<NotFound/>}/>
+          <Route path={"/pizza/:id"} element={<FullPizza />} />
+          <Route path={"*"} element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
