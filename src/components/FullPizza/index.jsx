@@ -4,16 +4,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 
-interface IPizzaItem {
-  imageUrl: string;
-  title: string;
-  price: number;
-}
-
-const FullPizza: React.FC = () => {
+const FullPizza = () => {
   const { id } = useParams();
 
-  const [item, setItem] = useState<IPizzaItem>();
+  const [item, setItem] = useState();
 
   const navigate = useNavigate();
 
