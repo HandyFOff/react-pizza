@@ -8,7 +8,7 @@ interface ICurrentPage {
 }
 
 interface IPaginateProps {
-  handlePageClick: (page: { selected: number }) => void;
+  handlePageClick: (page: number) => void;
 }
 
 const Paginate: React.FC<IPaginateProps> = ({ handlePageClick }) => {
@@ -19,11 +19,11 @@ const Paginate: React.FC<IPaginateProps> = ({ handlePageClick }) => {
       className={styles.paginate}
       breakLabel="..."
       nextLabel=">"
-      onPageChange={(page) => handlePageClick(page)}
+      onPageChange={(page) => handlePageClick(page.selected)}
       pageRangeDisplayed={5}
       pageCount={3}
       previousLabel="<"
-      initialPage={currentPage -= 1}
+      initialPage={(currentPage -= 1)}
       renderOnZeroPageCount={null}
     />
   );

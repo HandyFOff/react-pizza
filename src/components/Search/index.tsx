@@ -6,19 +6,19 @@ import { setSearchValue } from "../../redux/slices/filterSlice";
 
 const Search: React.FC = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState("");
 
   const searchRef = useRef<HTMLInputElement>(null);
 
   const onClearSearch = (): void => {
-    dispatch(setSearchValue({val: ""}));
+    dispatch(setSearchValue(""));
     setValue("");
     searchRef.current?.focus();
   };
 
   const debounsedSearch = useMemo(() =>
       debounce((val: string) => {
-        dispatch(setSearchValue({val}));
+        dispatch(setSearchValue(val));
       }, 350),
     [dispatch]
   );

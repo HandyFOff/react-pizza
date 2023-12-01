@@ -3,14 +3,8 @@ import styles from "./Categories.module.scss";
 import CategoriesItem from "./CategoriesItem";
 import { useSelector } from "react-redux";
 
-interface ICategories {
-  categories: {
-    list: string[]
-  }
-}
-
 const Categories: React.FC = () => {
-  const { categories }: ICategories = useSelector(selectFilters);
+  const { categories } = useSelector(selectFilters);
 
   return (
     <div className={styles.categories}>

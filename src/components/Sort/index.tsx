@@ -3,27 +3,15 @@ import styles from "./Sort.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { selectFilters, setSort } from "../../redux/slices/filterSlice";
 
-interface IListItem {
-  id: number;
-  sortName: string;
-  sort: string;
-}
-
-interface ISort {
-  sort: {
-    list: IListItem[];
-  };
-}
-
 const Sort: React.FC = () => {
-  const { sort }: ISort = useSelector(selectFilters);
+  const { sort } = useSelector(selectFilters);
   const dispatch = useDispatch();
 
-  const [opened, setOpened] = useState<boolean>(false);
-  const [selected, setSelected] = useState<number>(0);
+  const [opened, setOpened] = useState(false);
+  const [selected, setSelected] = useState(0);
 
   const handlerSort = (sortName: string, id: number): void => {
-    dispatch(setSort({ property: sortName, propertyName: id }));
+    dispatch(setSort({ sortName, id }));
     setSelected(id);
   };
 

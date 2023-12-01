@@ -10,19 +10,21 @@ interface IProps {
 interface ICategories {
   categories: {
     currentCategory: number;
-  }
+  };
 }
+
+type HandlerActiveType = (idx: number) => void;
 
 const CategoriesItem: React.FC<IProps> = ({ title, id }) => {
   const dispatch = useDispatch();
   const { categories }: ICategories = useSelector(selectFilters);
 
-  const handlerToActive = (): void | boolean => {
-    if (id === 0) {
-      dispatch(setCategory({ propertyId: "", id }));
-      return false;
+  const handlerToActive: HandlerActiveType = (idx) => {
+    if (idx === 0) {
+      dispatch(setCategory({ currentCategoryProperty: "", currentCategory: idx }));
+    } else {
+      dispatch(setCategory({ currentCategoryProperty: `&category=${idx}`, currentCategory: idx }));
     }
-    dispatch(setCategory({ propertyId: `&category=${id}`, id }));
   };
 
   return (
@@ -32,7 +34,7 @@ const CategoriesItem: React.FC<IProps> = ({ title, id }) => {
         " " +
         (categories.currentCategory === id ? styles.active : null)
       }
-      onClick={handlerToActive}
+      onClick={() => handlerToActive(id)}
     >
       <h1 className={styles.title}>{title}</h1>
     </div>

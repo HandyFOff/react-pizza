@@ -5,17 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { postToCart, selectCartById } from "../../../redux/slices/cartSlice";
 
 interface IProps {
-  id: number;
+  id: string;
   title: string;
   imageUrl: string;
   sizes: number[];
   price: number;
   types: number[];
 }
-
-type CartItemType = {
-  count: number;
-};
 
 const pizzaTypes = ["тонкое", "традиционное"];
 const pizzaSizes = [26, 30, 40];
@@ -28,10 +24,10 @@ const CatalogItem: React.FC<IProps> = ({
   price,
   types,
 }) => {
-  const [activeSize, setActiveSize] = useState<number>(0);
-  const [activeType, setActiveType] = useState<number>(0);
+  const [activeSize, setActiveSize] = useState(0);
+  const [activeType, setActiveType] = useState(0);
 
-  const cartItem: CartItemType = useSelector(selectCartById(id));
+  const cartItem = useSelector(selectCartById(id));
 
   const addedCount: number = cartItem ? cartItem.count : 0;
 

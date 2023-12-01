@@ -1,33 +1,37 @@
 import styles from "./CartItem.module.scss";
 import { useDispatch } from "react-redux";
-import { decreaseCount, deleteFromCart, postToCart } from "../../../redux/slices/cartSlice";
+import {
+  TCartItem,
+  decreaseCount,
+  deleteFromCart,
+  postToCart,
+} from "../../../redux/slices/cartSlice";
 
-interface IProps {
-  id: number;
-  imageUrl: string;
-  title: string;
-  type: number;
-  size: number;
-  price: number;
-  count: number;
-}
-
-const CartItem: React.FC<IProps> = ({ id, imageUrl, title, type, size, price, count }) => {
+const CartItem: React.FC<TCartItem> = ({
+  id,
+  imageUrl,
+  title,
+  type,
+  size,
+  price,
+  count,
+}) => {
   const dispatch = useDispatch();
 
   const plusCount = () => {
-    dispatch(postToCart({ id, price }));
+    const item = { id, imageUrl, title, type, size, price, count };
+    dispatch(postToCart(item));
   };
 
   const minusCount = (count: number): void => {
     if (count !== 1) {
-      dispatch(decreaseCount({ id, price }));
+      dispatch(decreaseCount(id));
     }
   };
 
   const handlerRemove = () => {
     window.confirm(`Вы точно хотите удалить ${count} ${title}?`);
-    dispatch(deleteFromCart({ id }));
+    dispatch(deleteFromCart(id));
   };
 
   return (

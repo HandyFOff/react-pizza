@@ -1,11 +1,28 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { RootState } from "../store";
 
 const API = "https://react-pizza-api.up.railway.app/api";
 
-const initialState = {
+type TPizza = {
+  id: string;
+  imageUrl: string;
+  title: string;
+  types: number[];
+  sizes: number[];
+  price: number;
+  category: number;
+  rating: number;
+};
+
+interface IPizzaSliceState {
+  items: TPizza[];
+  error: boolean;
+  loading: boolean;
+}
+
+const initialState: IPizzaSliceState = {
   items: [],
-  currentItem: {},
   error: false,
   loading: true,
 };
@@ -16,7 +33,7 @@ export const fetchPizza = createAsyncThunk(
     const { pageProperty, sortProperty, filterProperty, searchValue } = params;
 
     const { data } = await axios.get(
-      `${API}/data?q=${searchValue}&_page=${pageProperty}&_limit=4&_sort=${sortProperty}${filterProperty}`
+      `${API}/data?_page=${pageProperty}&_limit=4&q=${searchValue}&_sort=${sortProperty}${filterProperty}`
     );
 
     return data;
@@ -51,22 +68,18 @@ const pizzaSlice = createSlice({
       state.items = [];
     });
 
-    builder.addCase(fetchPizzaById.fulfilled, (state, action) => {
+    builder.addCase(fetchPizzaById.fulfilled, (state) => {
       state.loading = false;
       state.error = false;
-      state.currentItem = action.payload;
     });
     builder.addCase(fetchPizzaById.pending, (state) => {
       state.loading = true;
-      state.currentItem = {};
     });
     builder.addCase(fetchPizzaById.rejected, (state) => {
       state.error = true;
-      state.currentItem = {};
     });
   },
 });
 
-export const selectPizza = (state) => state.pizza;
+export const selectPizza = (state: RootState) => state.pizza;
 export default pizzaSlice.reducer;
-export const { setPizza } = pizzaSlice.actions;
