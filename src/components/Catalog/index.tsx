@@ -2,15 +2,16 @@ import styles from "./Catalog.module.scss";
 import CatalogItem from "./CatalogItem";
 import PizzaLoader from "../PizzaLoader";
 import Paginate from "../Paginate";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setPage } from "../../redux/slices/filterSlice";
 import Error from "./Error";
 import { selectPizza } from "../../redux/slices/pizzaSlice";
+import { useAppDispatch } from "../../redux/store";
 
 const Catalog: React.FC = () => {
   const { items, loading, error } = useSelector(selectPizza);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const renderItems = () => {
     return error ? (
@@ -18,12 +19,12 @@ const Catalog: React.FC = () => {
     ) : loading ? (
       [...Array(4)].map((_, index) => <PizzaLoader key={index} />)
     ) : (
-      items.map((item) => <CatalogItem key={item.id} {...item} />)
+      items.map((item) => <CatalogItem count={0} key={item.id} {...item} />)
     );
   };
 
   const handlePageClick = (selected: number): void => {
-    dispatch(setPage({ page: ++selected }));
+    dispatch(setPage(selected));
   };
 
   return (

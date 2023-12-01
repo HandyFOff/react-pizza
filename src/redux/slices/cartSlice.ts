@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
 export type TCartItem = {
-  id: number;
+  id: string;
   imageUrl: string;
   title: string;
-  type: number;
+  type: string;
   size: number;
   price: number;
   count: number;
@@ -44,7 +44,7 @@ const cartSlice = createSlice({
       state.totalPositions++;
       state.totalPrice += +action.payload.price;
     },
-    deleteFromCart: (state, action: PayloadAction<number>) => {
+    deleteFromCart: (state, action: PayloadAction<string>) => {
       const foundItem = state.data.find(
         (item) => item.id === action.payload
       );
@@ -56,7 +56,7 @@ const cartSlice = createSlice({
 
       state.data = state.data.filter((item) => item.id !== action.payload);
     },
-    decreaseCount: (state, action: PayloadAction<number>) => {
+    decreaseCount: (state, action: PayloadAction<string>) => {
       const foundInCart = state.data.find(
         (item) => item.id === action.payload
       );
@@ -78,7 +78,7 @@ const cartSlice = createSlice({
 });
 
 export const selectCart = (state: RootState) => state.cart;
-export const selectCartById = (id: number) => (state: RootState) =>
+export const selectCartById = (id: string) => (state: RootState) =>
   state.cart.data.find((item) => item.id === id);
 
 export const { postToCart, deleteFromCart, clearCart, decreaseCount } =

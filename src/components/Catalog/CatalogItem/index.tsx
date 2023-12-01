@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styles from "./CatalogItem.module.scss";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { postToCart, selectCartById } from "../../../redux/slices/cartSlice";
+import { useSelector } from "react-redux";
+import { TCartItem, postToCart, selectCartById } from "../../../redux/slices/cartSlice";
+import { useAppDispatch } from "../../../redux/store";
 
 interface IProps {
   id: string;
@@ -11,6 +12,7 @@ interface IProps {
   sizes: number[];
   price: number;
   types: number[];
+  count: number;
 }
 
 const pizzaTypes = ["тонкое", "традиционное"];
@@ -23,6 +25,7 @@ const CatalogItem: React.FC<IProps> = ({
   sizes,
   price,
   types,
+  count,
 }) => {
   const [activeSize, setActiveSize] = useState(0);
   const [activeType, setActiveType] = useState(0);
@@ -31,16 +34,17 @@ const CatalogItem: React.FC<IProps> = ({
 
   const addedCount: number = cartItem ? cartItem.count : 0;
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handlerAddToCart = (): void => {
-    const item = {
+    const item: TCartItem = {
       id,
       title,
       imageUrl,
       size: pizzaSizes[activeSize],
       price,
       type: pizzaTypes[activeType],
+      count, 
     };
     dispatch(postToCart(item));
   };

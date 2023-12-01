@@ -8,7 +8,7 @@ const Categories: React.FC = () => {
 
   return (
     <div className={styles.categories}>
-      {categories.list.map((title: string, index: number) => (
+      {categories.list?.map((title: string, index: number) => (
         <CategoriesItem key={index} id={index} title={title} />
       ))}
     </div>

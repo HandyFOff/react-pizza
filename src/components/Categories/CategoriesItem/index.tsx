@@ -1,23 +1,18 @@
 import styles from "./CategoriesItem.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectFilters, setCategory } from "../../../redux/slices/filterSlice";
+import { useAppDispatch } from "../../../redux/store";
 
 interface IProps {
   title: string;
   id: number;
 }
 
-interface ICategories {
-  categories: {
-    currentCategory: number;
-  };
-}
-
 type HandlerActiveType = (idx: number) => void;
 
 const CategoriesItem: React.FC<IProps> = ({ title, id }) => {
-  const dispatch = useDispatch();
-  const { categories }: ICategories = useSelector(selectFilters);
+  const dispatch = useAppDispatch();
+  const { categories } = useSelector(selectFilters);
 
   const handlerToActive: HandlerActiveType = (idx) => {
     if (idx === 0) {

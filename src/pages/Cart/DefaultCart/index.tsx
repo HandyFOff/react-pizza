@@ -1,17 +1,13 @@
 import styles from "./DefaultCart.module.scss";
 import CartCatalog from "../../../components/CartCatalog";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { clearCart, selectCart } from "../../../redux/slices/cartSlice";
-
-interface ICartTotals {
-  totalPrice: number;
-  totalPositions: number;
-}
+import { useAppDispatch } from "../../../redux/store";
 
 const DefaultCart: React.FC = () => {
-  const dispatch = useDispatch();
-  const { totalPrice, totalPositions }: ICartTotals = useSelector(selectCart);
+  const dispatch = useAppDispatch();
+  const { totalPrice, totalPositions } = useSelector(selectCart);
 
   const handlerClearCart = (): void => {
     if (window.confirm(`Вы точно хотите удалить все пиццы?`)) {

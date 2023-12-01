@@ -3,13 +3,8 @@ import styles from "./Navigations.module.scss";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../redux/slices/cartSlice";
 
-interface ICartTotals {
-  totalPrice: number;
-  totalPositions: number;
-}
-
 const Navigation: React.FC = () => {
-  const { totalPrice, totalPositions }: ICartTotals = useSelector(selectCart);
+  const { totalPrice, totalPositions } = useSelector(selectCart);
 
   return (
     <Link to={"/cart"} className={styles.button}>

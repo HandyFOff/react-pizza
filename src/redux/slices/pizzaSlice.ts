@@ -27,20 +27,20 @@ const initialState: IPizzaSliceState = {
   loading: true,
 };
 
-export const fetchPizza = createAsyncThunk(
+export const fetchPizza = createAsyncThunk<TPizza[], Record<string, string>>(
   "pizza/fetchPizza",
   async (params) => {
     const { pageProperty, sortProperty, filterProperty, searchValue } = params;
 
     const { data } = await axios.get(
-      `${API}/data?_page=${pageProperty}&_limit=4&q=${searchValue}&_sort=${sortProperty}${filterProperty}`
+      `${API}/data?_page=${pageProperty + 1}&_limit=4&q=${searchValue}&_sort=${sortProperty}${filterProperty}`
     );
 
     return data;
   }
 );
 
-export const fetchPizzaById = createAsyncThunk(
+export const fetchPizzaById = createAsyncThunk<TPizza, string>(
   "pizza/fetchPizzaById",
   async (id) => {
     const { data } = await axios.get(`${API}/data/${id}`);

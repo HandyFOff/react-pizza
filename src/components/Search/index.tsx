@@ -1,11 +1,11 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import styles from "./Search.module.scss";
 import debounce from "lodash.debounce";
-import { useDispatch } from "react-redux";
 import { setSearchValue } from "../../redux/slices/filterSlice";
+import { useAppDispatch } from "../../redux/store";
 
 const Search: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [value, setValue] = useState("");
 
   const searchRef = useRef<HTMLInputElement>(null);

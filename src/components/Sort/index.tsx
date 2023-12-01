@@ -1,11 +1,12 @@
 import { useState } from "react";
 import styles from "./Sort.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectFilters, setSort } from "../../redux/slices/filterSlice";
+import { useAppDispatch } from "../../redux/store";
 
 const Sort: React.FC = () => {
   const { sort } = useSelector(selectFilters);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(0);

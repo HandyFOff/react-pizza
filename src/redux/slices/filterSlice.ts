@@ -42,7 +42,7 @@ const initialState: IFilterSliceState = {
       { id: 2, sortName: "алфавиту", sort: "title&_order=asc" },
     ],
   },
-  currentPage: 1,
+  currentPage: 0,
 };
 
 const filtersSlice = createSlice({

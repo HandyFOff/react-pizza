@@ -3,16 +3,12 @@ import styles from "./Paginate.module.scss";
 import { useSelector } from "react-redux";
 import { selectFilters } from "../../redux/slices/filterSlice";
 
-interface ICurrentPage {
-  currentPage: number;
-}
-
 interface IPaginateProps {
   handlePageClick: (page: number) => void;
 }
 
 const Paginate: React.FC<IPaginateProps> = ({ handlePageClick }) => {
-  let { currentPage }: ICurrentPage = useSelector(selectFilters);
+  const { currentPage } = useSelector(selectFilters);
 
   return (
     <ReactPaginate
@@ -23,7 +19,7 @@ const Paginate: React.FC<IPaginateProps> = ({ handlePageClick }) => {
       pageRangeDisplayed={5}
       pageCount={3}
       previousLabel="<"
-      initialPage={(currentPage -= 1)}
+      initialPage={currentPage}
       renderOnZeroPageCount={null}
     />
   );
