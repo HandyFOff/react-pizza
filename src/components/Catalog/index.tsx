@@ -3,13 +3,15 @@ import CatalogItem from "./CatalogItem";
 import PizzaLoader from "../PizzaLoader";
 import Paginate from "../Paginate";
 import { useSelector } from "react-redux";
-import { setPage } from "../../redux/slices/filterSlice";
+import { selectFilters, setPage } from "../../redux/slices/filterSlice";
 import Error from "./Error";
 import { selectPizza } from "../../redux/slices/pizzaSlice";
 import { useAppDispatch } from "../../redux/store";
+import { useCallback } from "react";
 
 const Catalog: React.FC = () => {
   const { items, loading, error } = useSelector(selectPizza);
+  const { currentPage } = useSelector(selectFilters);
 
   const dispatch = useAppDispatch();
 
@@ -23,16 +25,16 @@ const Catalog: React.FC = () => {
     );
   };
 
-  const handlePageClick = (selected: number): void => {
+  const handlePageClick = useCallback((selected: number): void => {
     dispatch(setPage(selected));
-  };
+  }, [dispatch]);
 
   return (
     <div className={styles.catalog}>
       <div className={styles.content + " " + (error ? styles.error : "")}>
         {renderItems()}
       </div>
-      <Paginate handlePageClick={handlePageClick} />
+      <Paginate handlePageClick={handlePageClick} currentPage={currentPage} />
     </div>
   );
 };

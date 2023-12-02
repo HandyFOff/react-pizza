@@ -1,15 +1,13 @@
 import ReactPaginate from "react-paginate";
 import styles from "./Paginate.module.scss";
-import { useSelector } from "react-redux";
-import { selectFilters } from "../../redux/slices/filterSlice";
+import { memo } from "react";
 
 interface IPaginateProps {
   handlePageClick: (page: number) => void;
+  currentPage: number;
 }
 
-const Paginate: React.FC<IPaginateProps> = ({ handlePageClick }) => {
-  const { currentPage } = useSelector(selectFilters);
-
+const Paginate: React.FC<IPaginateProps> = memo(({ handlePageClick, currentPage }) => {
   return (
     <ReactPaginate
       className={styles.paginate}
@@ -23,6 +21,6 @@ const Paginate: React.FC<IPaginateProps> = ({ handlePageClick }) => {
       renderOnZeroPageCount={null}
     />
   );
-};
+});
 
 export default Paginate;

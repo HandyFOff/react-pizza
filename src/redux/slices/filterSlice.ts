@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-type TCategories = {
+export type TCategories = {
   currentCategory: number;
   currentCategoryProperty: string;
   list?: string[];
@@ -69,6 +69,10 @@ const filtersSlice = createSlice({
 });
 
 export const selectFilters = (state: RootState) => state.filters;
+
+export const selectCategories = createSelector(selectFilters, (state) => state.categories); // memorize categories
+export const selectSort = createSelector(selectFilters, (state) => state.sort); // memorize sort
+
 export const { setCategory, setSort, setPage, setSearchValue } =
   filtersSlice.actions;
 export default filtersSlice.reducer;

@@ -66,6 +66,10 @@
 }
 .minus {
   background-color: transparent;
+
+  &.disabled {
+    cursor: default;
+  }
 }
 .count {
   font-family: 'Inter';

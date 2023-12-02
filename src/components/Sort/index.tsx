@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { memo, useCallback, useState } from "react";
 import styles from "./Sort.module.scss";
 import { useSelector } from "react-redux";
-import { selectFilters, setSort } from "../../redux/slices/filterSlice";
+import { selectSort, setSort } from "../../redux/slices/filterSlice";
 import { useAppDispatch } from "../../redux/store";
 
-const Sort: React.FC = () => {
-  const { sort } = useSelector(selectFilters);
+const Sort: React.FC = memo(() => {
+  const sort = useSelector(selectSort);
   const dispatch = useAppDispatch();
 
   const [opened, setOpened] = useState(false);
   const [selected, setSelected] = useState(0);
 
-  const handlerSort = (sortName: string, id: number): void => {
-    dispatch(setSort({ sortName, id }));
-    setSelected(id);
-  };
+  const handlerSort = useCallback(
+    (sortName: string, id: number): void => {
+      dispatch(setSort({ sortName, id }));
+      setSelected(id);
+    },
+    [dispatch]
+  );
+
+  console.log('Sort rendered!');
+  
 
   const renderList = () => {
     return sort.list.map((item) => (
@@ -46,6 +52,6 @@ const Sort: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Sort;

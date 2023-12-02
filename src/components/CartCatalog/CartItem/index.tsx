@@ -1,4 +1,5 @@
 import styles from "./CartItem.module.scss";
+import clsx from "clsx";
 import {
   TCartItem,
   decreaseCount,
@@ -23,15 +24,14 @@ const CartItem: React.FC<TCartItem> = ({
     dispatch(postToCart(item));
   };
 
-  const minusCount = (count: number): void => {
-    if (count !== 1) {
-      dispatch(decreaseCount(id));
-    }
+  const minusCount = (id: string): void => {
+    dispatch(decreaseCount(id));
   };
 
   const handlerRemove = () => {
-    window.confirm(`Вы точно хотите удалить ${count} ${title}?`);
-    dispatch(deleteFromCart(id));
+    if (window.confirm(`Вы точно хотите удалить ${count} ${title}?`)) {
+      dispatch(deleteFromCart(id));
+    }
   };
 
   return (
@@ -49,10 +49,15 @@ const CartItem: React.FC<TCartItem> = ({
         <div className={styles.counter}>
           <button
             type="button"
-            className={styles.minus}
-            onClick={() => minusCount(count)}
+            className={`${styles.minus} ${count === 1 ? styles.disabled : ""}`}
+            onClick={() => minusCount(id)}
+            disabled={count === 1}
           >
-            <img src="assets/icons/minus-icon.svg" alt="minus" />
+            {count === 1 ? (
+              <img src="assets/icons/minus-inactive.svg" alt="minus" />
+            ) : (
+              <img src="assets/icons/minus-icon.svg" alt="minus" />
+            )}
           </button>
           <h1 className={styles.count}>{count}</h1>
           <button type="button" className={styles.plus} onClick={plusCount}>
