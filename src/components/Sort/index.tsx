@@ -1,8 +1,9 @@
 import { memo, useCallback, useState } from "react";
 import styles from "./Sort.module.scss";
 import { useSelector } from "react-redux";
-import { selectSort, setSort } from "../../redux/slices/filterSlice";
 import { useAppDispatch } from "../../redux/store";
+import { selectSort } from "../../redux/slices/filters/selectors";
+import { setSort } from "../../redux/slices/filters/slice";
 
 const Sort: React.FC = memo(() => {
   const sort = useSelector(selectSort);

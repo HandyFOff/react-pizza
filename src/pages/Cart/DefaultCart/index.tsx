@@ -2,8 +2,9 @@ import styles from "./DefaultCart.module.scss";
 import CartCatalog from "../../../components/CartCatalog";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { clearCart, selectCart } from "../../../redux/slices/cartSlice";
 import { useAppDispatch } from "../../../redux/store";
+import { selectCart } from "../../../redux/slices/cart/selectors";
+import { clearCart } from "../../../redux/slices/cart/slice";
 
 const DefaultCart: React.FC = () => {
   const dispatch = useAppDispatch();

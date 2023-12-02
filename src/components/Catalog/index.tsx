@@ -3,11 +3,12 @@ import CatalogItem from "./CatalogItem";
 import PizzaLoader from "../PizzaLoader";
 import Paginate from "../Paginate";
 import { useSelector } from "react-redux";
-import { selectFilters, setPage } from "../../redux/slices/filterSlice";
 import Error from "./Error";
-import { selectPizza } from "../../redux/slices/pizzaSlice";
 import { useAppDispatch } from "../../redux/store";
 import { useCallback } from "react";
+import { selectPizza } from "../../redux/slices/data/selectors";
+import { selectFilters } from "../../redux/slices/filters/selectors";
+import { setPage } from "../../redux/slices/filters/slice";
 
 const Catalog: React.FC = () => {
   const { items, loading, error } = useSelector(selectPizza);

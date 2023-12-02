@@ -2,8 +2,10 @@ import { useState } from "react";
 import styles from "./CatalogItem.module.scss";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { TCartItem, postToCart, selectCartById } from "../../../redux/slices/cartSlice";
 import { useAppDispatch } from "../../../redux/store";
+import { selectCartById } from "../../../redux/slices/cart/selectors";
+import { TCartItem } from "../../../redux/slices/cart/types";
+import { postToCart } from "../../../redux/slices/cart/slice";
 
 interface IProps {
   id: string;

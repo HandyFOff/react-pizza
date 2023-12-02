@@ -1,12 +1,11 @@
 import styles from "./CartItem.module.scss";
-import clsx from "clsx";
 import {
-  TCartItem,
   decreaseCount,
   deleteFromCart,
   postToCart,
-} from "../../../redux/slices/cartSlice";
+} from "../../../redux/slices/cart/slice";
 import { useAppDispatch } from "../../../redux/store";
+import { TCartItem } from "../../../redux/slices/cart/types";
 
 const CartItem: React.FC<TCartItem> = ({
   id,

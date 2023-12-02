@@ -3,10 +3,10 @@ import Catalog from "../../components/Catalog";
 import Categories from "../../components/Categories";
 import Sort from "../../components/Sort";
 import styles from "./Home.module.scss";
-import { selectFilters } from "../../redux/slices/filterSlice";
 import { useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
-import { fetchPizza } from "../../redux/slices/pizzaSlice";
+import { selectFilters } from "../../redux/slices/filters/selectors";
+import { fetchPizza } from "../../redux/slices/data/actions";
 
 const Home: React.FC = () => {
   const { sort, categories, currentPage, searchValue } =

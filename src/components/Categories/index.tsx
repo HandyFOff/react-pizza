@@ -1,8 +1,8 @@
 import { memo } from "react";
-import { selectCategories } from "../../redux/slices/filterSlice";
 import styles from "./Categories.module.scss";
 import CategoriesItem from "./CategoriesItem";
 import { useSelector } from "react-redux";
+import { selectCategories } from "../../redux/slices/filters/selectors";
 
 const Categories: React.FC = memo(() => {
   const categories = useSelector(selectCategories);

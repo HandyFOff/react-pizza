@@ -1,7 +1,7 @@
 import styles from "./CategoriesItem.module.scss";
-import { setCategory } from "../../../redux/slices/filterSlice";
 import { useAppDispatch } from "../../../redux/store";
 import { useCallback } from "react";
+import { setCategory } from "../../../redux/slices/filters/slice";
 
 interface IProps {
   title: string;
