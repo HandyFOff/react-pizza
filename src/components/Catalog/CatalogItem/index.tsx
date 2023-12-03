@@ -18,9 +18,8 @@ interface IProps {
 }
 
 const pizzaTypes = ["тонкое", "традиционное"];
-const pizzaSizes = [26, 30, 40];
 
-const CatalogItem: React.FC<IProps> = ({
+export const CatalogItem: React.FC<IProps> = ({
   id,
   title,
   imageUrl,
@@ -43,7 +42,7 @@ const CatalogItem: React.FC<IProps> = ({
       id,
       title,
       imageUrl,
-      size: pizzaSizes[activeSize],
+      size: sizes[activeSize],
       price,
       type: pizzaTypes[activeType],
       count, 
@@ -54,7 +53,7 @@ const CatalogItem: React.FC<IProps> = ({
   return (
     <div className={styles.item}>
       <Link to={`/pizza/${id}`} className={styles.img}>
-        <img src={imageUrl} alt="Pizza img" />
+        <img src={imageUrl} alt="Pizza img" loading="lazy"/>
       </Link>
       <Link to={`/pizza/${id}`}>
         <h1 className={styles.title}>{title}</h1>
@@ -118,5 +117,3 @@ const CatalogItem: React.FC<IProps> = ({
     </div>
   );
 };
-
-export default CatalogItem;

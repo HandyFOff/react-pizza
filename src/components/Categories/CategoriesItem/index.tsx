@@ -11,7 +11,7 @@ interface IProps {
 
 type HandlerActiveType = (idx: number) => void;
 
-const CategoriesItem: React.FC<IProps> = ({ title, id, active }) => {
+export const CategoriesItem: React.FC<IProps> = ({ title, id, active }) => {
   const dispatch = useAppDispatch();
 
   const handlerToActive: HandlerActiveType = useCallback((idx) => {
@@ -42,5 +42,3 @@ const CategoriesItem: React.FC<IProps> = ({ title, id, active }) => {
     </div>
   );
 };
-
-export default CategoriesItem;

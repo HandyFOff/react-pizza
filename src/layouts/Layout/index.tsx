@@ -1,5 +1,5 @@
+import { Header } from "../../components";
 import styles from "./Layout.module.scss";
-import Header from "../../components/Header";
 import { Outlet } from "react-router-dom";
 
 const Layout: React.FC = () => {

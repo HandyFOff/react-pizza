@@ -1,12 +1,16 @@
 import styles from "./DefaultCart.module.scss";
-import CartCatalog from "../../../components/CartCatalog";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAppDispatch } from "../../../redux/store";
 import { selectCart } from "../../../redux/slices/cart/selectors";
 import { clearCart } from "../../../redux/slices/cart/slice";
+import { CartCatalog } from "../../../components";
 
-const DefaultCart: React.FC = () => {
+type Props = {
+  setOrdered: (state: boolean) => void;
+}
+
+const DefaultCart: React.FC<Props> = ({setOrdered}) => {
   const dispatch = useAppDispatch();
   const { totalPrice, totalPositions } = useSelector(selectCart);
 
@@ -16,15 +20,22 @@ const DefaultCart: React.FC = () => {
     }
   };
 
+  const submitOrder = (): void => {
+    if (window.confirm('Вы точно хотите оформить заказ?')) {
+      setOrdered(true);
+      dispatch(clearCart());
+    }
+  }
+
   return (
     <div className={styles.cart}>
       <div className={styles.top}>
         <div className={styles.title}>
-          <img src="assets/icons/cart-icon.svg" alt="cart" />
+          <img src="assets/icons/cart-icon.svg" alt="cart" loading="lazy"/>
           <h1>Корзина</h1>
         </div>
         <div className={styles.clear} onClick={handlerClearCart}>
-          <img src="assets/icons/trash.svg" alt="trash" />
+          <img src="assets/icons/trash.svg" alt="trash" loading="lazy"/>
           <h1>Очистить корзину</h1>
         </div>
       </div>
@@ -60,7 +71,7 @@ const DefaultCart: React.FC = () => {
 
             <span>Вернуться назад</span>
           </Link>
-          <button type="button" className={styles.btn_buy}>
+          <button type="button" className={styles.btn_buy} onClick={submitOrder}>
             <span>Оплатить сейчас</span>
           </button>
         </div>

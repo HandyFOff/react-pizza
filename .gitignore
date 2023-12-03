@@ -12,6 +12,11 @@ dist
 dist-ssr
 *.local
 
+# Linters etc.
+
+.eslintrc.cjs
+.hintrc
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

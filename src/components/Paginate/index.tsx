@@ -7,7 +7,7 @@ interface IPaginateProps {
   currentPage: number;
 }
 
-const Paginate: React.FC<IPaginateProps> = memo(({ handlePageClick, currentPage }) => {
+export const Paginate: React.FC<IPaginateProps> = memo(({ handlePageClick, currentPage }) => {
   return (
     <ReactPaginate
       className={styles.paginate}
@@ -22,5 +22,3 @@ const Paginate: React.FC<IPaginateProps> = memo(({ handlePageClick, currentPage 
     />
   );
 });
-
-export default Paginate;

@@ -12,7 +12,7 @@ const EmptyCart: React.FC = () => {
         </p>
       </div>
       <div className={styles.img}>
-        <img src="assets/images/empty-cart.png" alt="empty-cart.png" />
+        <img src="assets/images/empty-cart.png" alt="empty-cart.png" loading="lazy"/>
       </div>
       <Link to={'/'} className={styles.button}>
         <span>Вернуться назад</span>

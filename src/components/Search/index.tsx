@@ -4,7 +4,7 @@ import debounce from "lodash.debounce";
 import { useAppDispatch } from "../../redux/store";
 import { setSearchValue } from "../../redux/slices/filters/slice";
 
-const Search: React.FC = () => {
+export const Search: React.FC = () => {
   const dispatch = useAppDispatch();
   const [value, setValue] = useState("");
 
@@ -57,5 +57,3 @@ const Search: React.FC = () => {
     </div>
   );
 };
-
-export default Search;

@@ -1,12 +1,10 @@
 import { useSelector } from "react-redux";
-import Catalog from "../../components/Catalog";
-import Categories from "../../components/Categories";
-import Sort from "../../components/Sort";
 import styles from "./Home.module.scss";
 import { useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
 import { selectFilters } from "../../redux/slices/filters/selectors";
 import { fetchPizza } from "../../redux/slices/data/actions";
+import { Catalog, Categories, Sort } from "../../components";
 
 const Home: React.FC = () => {
   const { sort, categories, currentPage, searchValue } =

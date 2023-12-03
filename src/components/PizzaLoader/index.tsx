@@ -1,12 +1,11 @@
 import ContentLoader from "react-content-loader";
 
-const PizzaLoader: React.FC = () => {
+export const PizzaLoader: React.FC = () => {
   return (
     <ContentLoader
       speed={2}
       width={"100%"}
       height={"500"}
-      viewBox="0 0 100% 500"
       backgroundColor="#f3f3f3"
       foregroundColor="#ecebeb"
     >
@@ -17,5 +16,3 @@ const PizzaLoader: React.FC = () => {
     </ContentLoader>
   );
 };
-
-export default PizzaLoader;

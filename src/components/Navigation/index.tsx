@@ -6,17 +6,15 @@ interface IProps {
   totalPositions: number;
 }
 
-const Navigation: React.FC<IProps> = ({ totalPrice, totalPositions }) => {
+export const Navigation: React.FC<IProps> = ({ totalPrice, totalPositions }) => {
   return (
     <Link to={"/cart"} className={styles.button}>
       <span className={styles.total}>{totalPrice} ₽</span>
-      <img src="/assets/icons/stick.svg" alt="separate" />
+      <img src="/assets/icons/stick.svg" alt="separate" loading="lazy"/>
       <div className={styles.count}>
-        <img src="/assets/icons/cart.svg" alt="Cart" />
+        <img src="/assets/icons/cart.svg" alt="Cart" loading="lazy"/>
         <span>{totalPositions}</span>
       </div>
     </Link>
   );
 };
-
-export default Navigation;

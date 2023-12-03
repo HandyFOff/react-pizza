@@ -1,10 +1,10 @@
 import { memo } from "react";
 import styles from "./Categories.module.scss";
-import CategoriesItem from "./CategoriesItem";
 import { useSelector } from "react-redux";
 import { selectCategories } from "../../redux/slices/filters/selectors";
+import { CategoriesItem } from "..";
 
-const Categories: React.FC = memo(() => {
+export const Categories: React.FC = memo(() => {
   const categories = useSelector(selectCategories);
 
   return (
@@ -15,5 +15,3 @@ const Categories: React.FC = memo(() => {
     </div>
   );
 });
-
-export default Categories;

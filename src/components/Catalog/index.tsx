@@ -1,16 +1,13 @@
 import styles from "./Catalog.module.scss";
-import CatalogItem from "./CatalogItem";
-import PizzaLoader from "../PizzaLoader";
-import Paginate from "../Paginate";
 import { useSelector } from "react-redux";
-import Error from "./Error";
 import { useAppDispatch } from "../../redux/store";
 import { useCallback } from "react";
 import { selectPizza } from "../../redux/slices/data/selectors";
 import { selectFilters } from "../../redux/slices/filters/selectors";
 import { setPage } from "../../redux/slices/filters/slice";
+import { CatalogItem, Paginate, PizzaLoader, Error } from "..";
 
-const Catalog: React.FC = () => {
+export const Catalog: React.FC = () => {
   const { items, loading, error } = useSelector(selectPizza);
   const { currentPage } = useSelector(selectFilters);
 
@@ -39,5 +36,3 @@ const Catalog: React.FC = () => {
     </div>
   );
 };
-
-export default Catalog;

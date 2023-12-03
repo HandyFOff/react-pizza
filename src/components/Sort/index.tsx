@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../redux/store";
 import { selectSort } from "../../redux/slices/filters/selectors";
 import { setSort } from "../../redux/slices/filters/slice";
 
-const Sort: React.FC = memo(() => {
+export const Sort: React.FC = memo(() => {
   const sort = useSelector(selectSort);
   const dispatch = useAppDispatch();
 
@@ -19,9 +19,6 @@ const Sort: React.FC = memo(() => {
     },
     [dispatch]
   );
-
-  console.log('Sort rendered!');
-  
 
   const renderList = () => {
     return sort.list.map((item) => (
@@ -42,7 +39,7 @@ const Sort: React.FC = memo(() => {
   return (
     <div className={styles.sort}>
       <div className={styles.dropdownBtn}>
-        <img src="assets/icons/sort-arrow.svg" alt="sort arrow" />
+        <img src="assets/icons/sort-arrow.svg" alt="sort arrow" loading="lazy"/>
         <h1>Сортировка по:</h1>
       </div>
       <span className={styles.title} onClick={() => setOpened((prev) => !prev)}>
@@ -54,5 +51,3 @@ const Sort: React.FC = memo(() => {
     </div>
   );
 });
-
-export default Sort;
