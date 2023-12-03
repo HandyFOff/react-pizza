@@ -13,7 +13,7 @@ export const fetchPizza = createAsyncThunk<TPizza[], Record<string, string>>(
 
       const { data } = await axios.get(
         `${API}/data?_page=${
-          pageProperty + 1
+          +pageProperty + 1
         }&_limit=4&q=${searchValue}&_sort=${sortProperty}${filterProperty}`
       );
 
