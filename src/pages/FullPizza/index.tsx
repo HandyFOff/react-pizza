@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import styles from "./FullPizza.module.scss";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
 import { TPizza } from "../../redux/slices/data/types";
 
 const pizzaTypes = ["тонкое", "традиционное"];
-const pizzaSizes = [26, 30, 40];
 
 const FullPizza: React.FC = () => {
   const { id } = useParams();

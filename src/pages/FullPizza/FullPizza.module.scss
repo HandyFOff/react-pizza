@@ -2,6 +2,11 @@
   display: flex;
   gap: 32px;
   margin-top: 45px;
+
+  @media (max-width: 596px) {
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 .img {
   & > img {
