@@ -23,9 +23,12 @@ export const Catalog: React.FC = () => {
     );
   };
 
-  const handlePageClick = useCallback((selected: number): void => {
-    dispatch(setPage(selected));
-  }, [dispatch]);
+  const handlePageClick = useCallback(
+    (selected: number): void => {
+      dispatch(setPage(selected));
+    },
+    [dispatch]
+  );
 
   return (
     <div className={styles.catalog}>

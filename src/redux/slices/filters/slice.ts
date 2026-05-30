@@ -10,11 +10,11 @@ const initialState: IFilterSliceState = {
   },
   sort: {
     currentSort: "популярности",
-    currentSortProperty: "rating&_order=desc",
+    currentSortProperty: "orderby=rating",
     list: [
-      { id: 0, sortName: "популярности", sort: "rating&_order=desc" },
-      { id: 1, sortName: "цене", sort: "price&_order=asc" },
-      { id: 2, sortName: "алфавиту", sort: "title&_order=asc" },
+      { id: 0, sortName: "популярности", sort: "orderby=rating" },
+      { id: 1, sortName: "цене", sort: "orderby=price" },
+      { id: 2, sortName: "алфавиту", sort: "orderby=title" },
     ],
   },
   currentPage: 0,

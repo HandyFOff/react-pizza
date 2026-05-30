@@ -36,7 +36,7 @@ export const CartItem: React.FC<TCartItem> = ({
   return (
     <div className={styles.item}>
       <div className={styles.info}>
-        <img src={imageUrl} alt="pizza" loading="lazy"/>
+        <img src={imageUrl} alt="pizza" loading="lazy" />
         <div className={styles.infoBlock}>
           <h1 className={styles.title}>{title}</h1>
           <p className={styles.description}>
@@ -53,19 +53,27 @@ export const CartItem: React.FC<TCartItem> = ({
             disabled={count === 1}
           >
             {count === 1 ? (
-              <img src="assets/icons/minus-inactive.svg" alt="minus" loading="lazy"/>
+              <img
+                src="assets/icons/minus-inactive.svg"
+                alt="minus"
+                loading="lazy"
+              />
             ) : (
-              <img src="assets/icons/minus-icon.svg" alt="minus" loading="lazy"/>
+              <img
+                src="assets/icons/minus-icon.svg"
+                alt="minus"
+                loading="lazy"
+              />
             )}
           </button>
           <h1 className={styles.count}>{count}</h1>
           <button type="button" className={styles.plus} onClick={plusCount}>
-            <img src="assets/icons/plus-icon.svg" alt="plus" loading="lazy"/>
+            <img src="assets/icons/plus-icon.svg" alt="plus" loading="lazy" />
           </button>
         </div>
         <h1 className={styles.price}>{price * count} ₽</h1>
         <button type="button" className={styles.remove} onClick={handlerRemove}>
-          <img src="assets/icons/cross.svg" alt="remove" loading="lazy"/>
+          <img src="assets/icons/cross.svg" alt="remove" loading="lazy" />
         </button>
       </div>
     </div>

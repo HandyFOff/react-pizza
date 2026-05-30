@@ -9,7 +9,17 @@ const Cart: React.FC = () => {
   const { data } = useSelector(selectCart);
   const [ordered, setOrdered] = useState(false);
 
-  return <>{ordered ? <SuccsesfulCart/> : (data.length ? <DefaultCart setOrdered={setOrdered} /> : <EmptyCart />)}</>;
+  return (
+    <>
+      {ordered ? (
+        <SuccsesfulCart />
+      ) : data.length ? (
+        <DefaultCart setOrdered={setOrdered} />
+      ) : (
+        <EmptyCart />
+      )}
+    </>
+  );
 };
 
 export default Cart;

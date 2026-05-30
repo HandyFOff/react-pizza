@@ -2,7 +2,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { TPizza } from "./types";
 import axios from "axios";
 
-const API = "https://react-pizza-api.up.railway.app/api";
+const API = import.meta.env.VITE_API_URL;
 
 export const fetchPizza = createAsyncThunk<TPizza[], Record<string, string>>(
   "pizza/fetchPizza",
@@ -12,9 +12,9 @@ export const fetchPizza = createAsyncThunk<TPizza[], Record<string, string>>(
         params;
 
       const { data } = await axios.get(
-        `${API}/data?_page=${
+        `${API}/pizza?page=${
           +pageProperty + 1
-        }&_limit=4&q=${searchValue}&_sort=${sortProperty}${filterProperty}`
+        }&limit=4&search=${searchValue}&${sortProperty}${filterProperty}`
       );
 
       return data;
@@ -28,7 +28,7 @@ export const fetchPizzaById = createAsyncThunk<TPizza, string>(
   "pizza/fetchPizzaById",
   async (id, { rejectWithValue }) => {
     try {
-      const { data } = await axios.get(`${API}/data/${id}`);
+      const { data } = await axios.get(`${API}/pizza/${id}`);
 
       return data;
     } catch (error) {
