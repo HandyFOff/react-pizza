@@ -2,19 +2,22 @@ import { useSelector } from "react-redux";
 import styles from "./Home.module.scss";
 import { useAppDispatch } from "../../redux/store";
 import { useEffect } from "react";
-import { selectFilters } from "../../redux/slices/filters/selectors";
+import {
+  selectCurrentCategoryProperty,
+  selectCurrentPage,
+  selectCurrentSortProperty,
+  selectSearchValue,
+} from "../../redux/slices/filters/selectors";
 import { fetchPizza } from "../../redux/slices/data/actions";
 import { Catalog, Categories, Sort } from "../../components";
 
 const Home: React.FC = () => {
-  const { sort, categories, currentPage, searchValue } =
-    useSelector(selectFilters);
+  const sortProperty = useSelector(selectCurrentSortProperty);
+  const filterProperty = useSelector(selectCurrentCategoryProperty);
+  const pageProperty = useSelector(selectCurrentPage);
+  const searchValue = useSelector(selectSearchValue);
 
   const dispatch = useAppDispatch();
-
-  const sortProperty = sort.currentSortProperty;
-  const filterProperty = categories.currentCategoryProperty;
-  const pageProperty = currentPage;
 
   useEffect(() => {
     dispatch(

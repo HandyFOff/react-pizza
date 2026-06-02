@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./Search.module.scss";
 import debounce from "lodash.debounce";
 import { useAppDispatch } from "../../redux/store";
@@ -9,27 +9,29 @@ export const Search: React.FC = () => {
   const [value, setValue] = useState("");
 
   const searchRef = useRef<HTMLInputElement>(null);
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((val: string) => {
+        dispatch(setSearchValue(val));
+      }, 350),
+    [dispatch],
+  );
+
+  useEffect(() => {
+    return () => debouncedSearch.cancel?.();
+  }, [debouncedSearch]);
 
   const onClearSearch = (): void => {
+    debouncedSearch.cancel?.();
     dispatch(setSearchValue(""));
     setValue("");
     searchRef.current?.focus();
   };
 
-  const debounsedSearch = useMemo(() =>
-      debounce((val: string) => {
-        dispatch(setSearchValue(val));
-      }, 350),
-    [dispatch]
-  );
-
-  const onChangeInput = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>): void => {
-      debounsedSearch((e.target.value).trim());
-      setValue((e.target.value));
-    },
-    [setValue, debounsedSearch]
-  );
+  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    debouncedSearch(e.target.value.trim());
+    setValue(e.target.value);
+  };
 
   return (
     <div className={styles.inputBlock}>

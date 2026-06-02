@@ -10,16 +10,17 @@ const pizzaTypes = ["тонкое", "традиционное"];
 const FullPizza: React.FC = () => {
   const { id } = useParams();
 
+  console.log(id);
+  
+
   const [item, setItem] = useState<TPizza>();
 
   const navigate = useNavigate();
 
-  const API = "https://react-pizza-api.up.railway.app/api";
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get(`${API}/data/${id}`);
+        const { data } = await axios.get(`${import.meta.env.VITE_API_URL}/pizza/${id}`);
 
         setItem(data);
       } catch (error) {
