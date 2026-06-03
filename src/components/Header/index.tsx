@@ -25,7 +25,7 @@ export const Header: React.FC = () => {
         <Link to={"/"} className={styles.logo}>
           <img src="/assets/logo.svg" alt="React Pizza logo" loading="lazy"/>
         </Link>
-        {pathname !== "/cart" ? <Search /> : null}
+        {pathname !== '/cart' && !pathname.startsWith('/pizza/') ? <Search /> : null}
       </div>
       {pathname !== "/cart" ? (
         <Navigation totalPrice={totalPrice} totalPositions={totalPositions} />

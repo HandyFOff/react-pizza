@@ -1,10 +1,11 @@
-export type TCartItem = {
-  id: string;
-  imageUrl: string;
-  title: string;
-  type: string;
+import { TPizza } from "../data/types";
+
+export type TCartItem = Omit<
+  TPizza,
+  "rating" | "types" | "category" | "sizes"
+> & {
   size: number;
-  price: number;
+  type: string;
   count: number;
 };
 

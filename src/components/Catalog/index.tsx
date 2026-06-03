@@ -19,7 +19,7 @@ export const Catalog: React.FC = () => {
     ) : loading ? (
       [...Array(4)].map((_, index) => <PizzaLoader key={index} />)
     ) : (
-      items.map((item) => <CatalogItem count={0} key={item.id} {...item} />)
+      items.map((item) => <CatalogItem key={item.id} {...item} />)
     );
   };
 

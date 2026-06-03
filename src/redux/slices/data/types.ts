@@ -11,6 +11,7 @@ export type TPizza = {
 
 export interface IPizzaSliceState {
   items: TPizza[];
+  selectedItem: TPizza | null;
   error: boolean;
   loading: boolean;
 }
